@@ -21,18 +21,24 @@ export default function ItemDetails() {
     };
 
     useEffect(() => {
+        let cancelled = false;
         setItem(null);
         setErrorMessage('');
 
         fetchItemContent(Number(id))
             .then((data) => {
-                setItem(data);
+                if (!cancelled) {
+                    setItem(data);
+                }
             })
             .catch(() => {
-                setErrorMessage('Could not load item comments.');
+                if (!cancelled) {
+                    setErrorMessage('Could not load item comments.');
+                }
             });
 
         window.scrollTo(0, 0);
+        return () => { cancelled = true; };
     }, [id]);
 
     const hasUrl = item?.url?.startsWith('http');

@@ -17,16 +17,22 @@ export default function User() {
     };
 
     useEffect(() => {
+        let cancelled = false;
         setUser(null);
         setErrorMessage('');
 
         fetchUser(id!)
             .then((data) => {
-                setUser(data);
+                if (!cancelled) {
+                    setUser(data);
+                }
             })
             .catch(() => {
-                setErrorMessage('Could not load user ' + id + '.');
+                if (!cancelled) {
+                    setErrorMessage('Could not load user ' + id + '.');
+                }
             });
+        return () => { cancelled = true; };
     }, [id]);
 
     return (
