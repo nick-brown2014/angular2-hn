@@ -97,7 +97,7 @@ h1 {
   }
 }
 
-.header-nav {
+#header .header-nav {
   display: inline-block;
   margin-left: 20px;
 
@@ -110,6 +110,10 @@ h1 {
     text-decoration: none;
     margin: 0 5px;
     letter-spacing: 1.8px;
+
+    &:visited {
+      color: hsla(0,0%,100%,.9);
+    }
 
     &:hover {
       color: #fff;
