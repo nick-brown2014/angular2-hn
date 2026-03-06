@@ -13,18 +13,25 @@ export default function User() {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
+        let stale = false;
         setUser(null);
         setErrorMessage('');
 
         if (id) {
             fetchUser(id)
                 .then((data) => {
-                    setUser(data);
+                    if (!stale) {
+                        setUser(data);
+                    }
                 })
                 .catch(() => {
-                    setErrorMessage('Could not load user ' + id + '.');
+                    if (!stale) {
+                        setErrorMessage('Could not load user ' + id + '.');
+                    }
                 });
         }
+
+        return () => { stale = true; };
     }, [id]);
 
     const goBack = () => {
