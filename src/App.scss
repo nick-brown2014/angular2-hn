@@ -1,5 +1,5 @@
-@import "./styles/media";
-@import "./styles/theme_variables";
+@use "./styles/media" as *;
+@use "./styles/theme_variables" as *;
 
 .body-cover {
   width: 100%;

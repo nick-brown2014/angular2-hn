@@ -130,7 +130,7 @@ export default function ItemDetails() {
                     )}
                     <p className="subject" dangerouslySetInnerHTML={{ __html: item.content }} />
                     <ul className="comment-list">
-                        {item.comments.map((comment) => (
+                        {item.comments?.map((comment) => (
                             <li key={comment.id}>
                                 <Comment comment={comment} />
                             </li>

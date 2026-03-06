@@ -31,7 +31,7 @@ export default function Comment({ comment }: CommentProps) {
                 <div hidden={collapsed}>
                     <p className="comment-text" dangerouslySetInnerHTML={{ __html: comment.content }} />
                     <ul className="subtree">
-                        {comment.comments.map((subComment) => (
+                        {comment.comments?.map((subComment) => (
                             <li key={subComment.id}>
                                 <Comment comment={subComment} />
                             </li>

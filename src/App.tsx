@@ -10,7 +10,7 @@ import './App.scss';
 const LazyItemDetails = React.lazy(() => import('./components/item-details/ItemDetails'));
 const LazyUser = React.lazy(() => import('./components/user/User'));
 
-declare let ga: Function;
+declare let ga: (...args: unknown[]) => void;
 
 function GATracker() {
     const location = useLocation();
@@ -36,7 +36,7 @@ function AppContent() {
                 <Header />
                 <Suspense fallback={<Loader />}>
                     <Routes>
-                        <Route path="/" element={<Navigate to="/news/1" />} />
+                        <Route path="/" element={<Navigate to="/news/1" replace />} />
                         <Route path="/news/:page" element={<Feed feedType="news" />} />
                         <Route path="/newest/:page" element={<Feed feedType="newest" />} />
                         <Route path="/show/:page" element={<Feed feedType="show" />} />

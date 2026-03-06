@@ -1,5 +1,5 @@
-@import "../../styles/media";
-@import "../../styles/theme_variables";
+@use "../../styles/media" as *;
+@use "../../styles/theme_variables" as *;
 
 .loader {
   -webkit-animation: load1 1s infinite ease-in-out;

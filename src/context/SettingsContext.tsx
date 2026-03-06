@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { Settings } from '../models/settings';
 
 export interface SettingsContextType {
@@ -51,32 +51,32 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const toggleSettings = () => {
+  const toggleSettings = useCallback(() => {
     setSettings((prev) => ({ ...prev, showSettings: !prev.showSettings }));
-  };
+  }, []);
 
-  const toggleOpenLinksInNewTab = () => {
+  const toggleOpenLinksInNewTab = useCallback(() => {
     setSettings((prev) => {
       const newValue = !prev.openLinkInNewTab;
       localStorage.setItem('openLinkInNewTab', JSON.stringify(newValue));
       return { ...prev, openLinkInNewTab: newValue };
     });
-  };
+  }, []);
 
-  const setTheme = (theme: string) => {
+  const setTheme = useCallback((theme: string) => {
     localStorage.setItem('theme', theme);
     setSettings((prev) => ({ ...prev, theme }));
-  };
+  }, []);
 
-  const setFont = (size: string) => {
+  const setFont = useCallback((size: string) => {
     localStorage.setItem('titleFontSize', size);
     setSettings((prev) => ({ ...prev, titleFontSize: size }));
-  };
+  }, []);
 
-  const setSpacing = (spacing: string) => {
+  const setSpacing = useCallback((spacing: string) => {
     localStorage.setItem('listSpacing', spacing);
     setSettings((prev) => ({ ...prev, listSpacing: spacing }));
-  };
+  }, []);
 
   return (
     <SettingsContext.Provider
