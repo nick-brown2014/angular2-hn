@@ -1,5 +1,5 @@
-@import "../media";
-@import "../theme_variables";
+@use "../media" as *;
+@use "../theme_variables" as *;
 
 p {
     margin: 2px 0;

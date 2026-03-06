@@ -1,5 +1,5 @@
-@import "../media";
-@import "../theme_variables";
+@use "../media" as *;
+@use "../theme_variables" as *;
 
 .error-section {
   height: 300px;
