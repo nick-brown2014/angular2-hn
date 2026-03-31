@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { routing } from './app.routes';
 
@@ -11,13 +12,12 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { PipesModule } from './shared/pipes/pipes.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HackerNewsAPIService } from './shared/services/hackernews-api.service';
-import { SettingsService } from './shared/services/settings.service';
 
 @NgModule({
     declarations: [AppComponent, FeedComponent, ItemComponent],
     imports: [
         BrowserModule,
+        HttpClientModule,
         routing,
         CoreModule,
         SharedComponentsModule,
@@ -26,7 +26,6 @@ import { SettingsService } from './shared/services/settings.service';
             enabled: environment.production,
         }),
     ],
-    providers: [HackerNewsAPIService, SettingsService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

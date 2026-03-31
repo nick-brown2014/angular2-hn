@@ -6,11 +6,12 @@ import { Settings } from '../../shared/models/settings';
 
 @Component({
   selector: 'item',
+  standalone: false,
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() item: Story;
+  @Input() item!: Story;
   settings: Settings;
 
   constructor(private _settingsService: SettingsService) {
