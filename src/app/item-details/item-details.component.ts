@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
+import { Location, ViewportScroller } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 import { HackerNewsAPIService } from '../shared/services/hackernews-api.service';
 import { SettingsService } from '../shared/services/settings.service';
 
 import { Story } from '../shared/models/story';
 import { Settings } from '../shared/models/settings';
+import { Comment } from '../shared/models/comment';
 
 @Component({
   selector: 'app-item-details',
+  standalone: false,
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.scss']
 })
-export class ItemDetailsComponent implements OnInit {
-  sub: Subscription;
-  item: Story;
+export class ItemDetailsComponent implements OnInit, OnDestroy {
+  sub!: Subscription;
+  item!: Story;
   errorMessage = '';
   settings: Settings;
 
@@ -24,22 +26,28 @@ export class ItemDetailsComponent implements OnInit {
     private _hackerNewsAPIService: HackerNewsAPIService,
     private _settingsService: SettingsService,
     private route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private viewportScroller: ViewportScroller
   ) {
     this.settings = this._settingsService.settings;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      let itemID = +params['id'];
-      this._hackerNewsAPIService.fetchItemContent(itemID).subscribe(item => {
-        this.item = item;
-      }, error => this.errorMessage = 'Could not load item comments.');
+      const itemID = +params['id'];
+      this._hackerNewsAPIService.fetchItemContent(itemID).subscribe({
+        next: item => this.item = item,
+        error: () => this.errorMessage = 'Could not load item comments.'
+      });
     });
-    window.scrollTo(0, 0);
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 
-  goBack() {
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  goBack(): void {
     this._location.back();
   }
 
@@ -47,4 +55,7 @@ export class ItemDetailsComponent implements OnInit {
     return this.item.url.indexOf('http') === 0;
   }
 
+  trackByCommentId(_index: number, comment: Comment): number {
+    return comment.id;
+  }
 }

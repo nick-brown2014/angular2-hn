@@ -2,7 +2,7 @@ import { Comment } from './comment';
 import { FeedType } from './feed-type.type';
 import { PollResult } from './poll-result';
 
-export class Story {
+export interface Story {
     id: number;
     title: string;
     points: number;
@@ -12,6 +12,8 @@ export class Story {
     type: FeedType;
     url: string;
     domain: string;
+    content: string;
+    text: string;
     comments: Comment[];
     comments_count: number;
     poll: PollResult[];
