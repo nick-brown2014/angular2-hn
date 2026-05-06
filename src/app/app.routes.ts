@@ -7,7 +7,7 @@ const feedRoutes = [{
   component: FeedComponent
 }];
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', redirectTo: 'news/1', pathMatch: 'full'},
   {
     path: 'news',
