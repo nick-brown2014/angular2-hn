@@ -1,7 +1,9 @@
 import { browser, by, element, ElementArrayFinder } from 'protractor';
 
 export class AppPage {
-  navigateTo(path: string = '/') {
+  navigateTo(path: string = '') {
+    // browser.baseUrl in protractor.conf.js already has a trailing slash, so the
+    // default path is empty to avoid producing a double-slash URL.
     return browser.get(browser.baseUrl + path) as Promise<any>;
   }
 
