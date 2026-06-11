@@ -12,7 +12,7 @@ before_script:
 
 script:
   - npm run lint
-  - ng test --watch=false --browsers=ChromeHeadless
+  - ng test --watch=false --browsers=ChromeHeadlessCI
   - npm run build
 
 after_success:

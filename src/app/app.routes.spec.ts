@@ -1,18 +1,14 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { Location } from '@angular/common';
-import { NgModuleFactoryLoader } from '@angular/core';
-import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { routing } from './app.routes';
 import { FeedComponent } from './feeds/feed/feed.component';
 import { ItemComponent } from './feeds/item/item.component';
 import { HackerNewsAPIService } from './shared/services/hackernews-api.service';
 import { SettingsService } from './shared/services/settings.service';
-
-@Component({ template: '' })
-class DummyComponent {}
 
 describe('App Routes', () => {
   let router: Router;
@@ -39,18 +35,10 @@ describe('App Routes', () => {
 
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule.withRoutes([
-          { path: '', redirectTo: 'news/1', pathMatch: 'full' },
-          { path: 'news', children: [{ path: ':page', component: FeedComponent }], data: { feedType: 'news' } },
-          { path: 'newest', children: [{ path: ':page', component: FeedComponent }], data: { feedType: 'newest' } },
-          { path: 'show', children: [{ path: ':page', component: FeedComponent }], data: { feedType: 'show' } },
-          { path: 'ask', children: [{ path: ':page', component: FeedComponent }], data: { feedType: 'ask' } },
-          { path: 'jobs', children: [{ path: ':page', component: FeedComponent }], data: { feedType: 'jobs' } },
-          { path: 'item/:id', component: DummyComponent },
-          { path: 'user/:id', component: DummyComponent }
-        ])
+        routing,
+        RouterTestingModule
       ],
-      declarations: [FeedComponent, ItemComponent, DummyComponent],
+      declarations: [FeedComponent, ItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: HackerNewsAPIService, useValue: mockHnService },
@@ -99,15 +87,49 @@ describe('App Routes', () => {
     expect(location.path()).toBe('/jobs/1');
   }));
 
-  it('should navigate to /item/:id', fakeAsync(() => {
-    router.navigate(['/item', '123']);
-    tick();
-    expect(location.path()).toBe('/item/123');
-  }));
+  describe('route data', () => {
+    it('should provide feedType "news" for /news routes', () => {
+      const newsRoute = router.config.find(r => r.path === 'news');
+      expect(newsRoute).toBeDefined();
+      expect(newsRoute.data).toEqual({ feedType: 'news' });
+    });
 
-  it('should navigate to /user/:id', fakeAsync(() => {
-    router.navigate(['/user', 'testuser']);
-    tick();
-    expect(location.path()).toBe('/user/testuser');
-  }));
+    it('should provide feedType "newest" for /newest routes', () => {
+      const route = router.config.find(r => r.path === 'newest');
+      expect(route).toBeDefined();
+      expect(route.data).toEqual({ feedType: 'newest' });
+    });
+
+    it('should provide feedType "show" for /show routes', () => {
+      const route = router.config.find(r => r.path === 'show');
+      expect(route).toBeDefined();
+      expect(route.data).toEqual({ feedType: 'show' });
+    });
+
+    it('should provide feedType "ask" for /ask routes', () => {
+      const route = router.config.find(r => r.path === 'ask');
+      expect(route).toBeDefined();
+      expect(route.data).toEqual({ feedType: 'ask' });
+    });
+
+    it('should provide feedType "jobs" for /jobs routes', () => {
+      const route = router.config.find(r => r.path === 'jobs');
+      expect(route).toBeDefined();
+      expect(route.data).toEqual({ feedType: 'jobs' });
+    });
+  });
+
+  describe('lazy-loaded routes', () => {
+    it('should have loadChildren for /item path', () => {
+      const itemRoute = router.config.find(r => r.path === 'item');
+      expect(itemRoute).toBeDefined();
+      expect(itemRoute.loadChildren).toBeDefined();
+    });
+
+    it('should have loadChildren for /user path', () => {
+      const userRoute = router.config.find(r => r.path === 'user');
+      expect(userRoute).toBeDefined();
+      expect(userRoute.loadChildren).toBeDefined();
+    });
+  });
 });
