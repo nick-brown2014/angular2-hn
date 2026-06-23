@@ -36,17 +36,15 @@ export function Feed({ feedType }: FeedProps) {
                     through <a href="https://triplebyte.com/?ref=yc_jobs">Triplebyte</a>.
                 </p>
             )}
-            {feedType !== 'new' && (
-                <ol className={`${styles.ol} ${feedType !== 'jobs' ? styles.listMargin : ''}`} start={listStart}>
-                    {items?.map((item) => (
-                        <li key={item.id} className={styles.post}>
-                            <div className={styles.itemBlock}>
-                                <FeedItem item={item} />
-                            </div>
-                        </li>
-                    ))}
-                </ol>
-            )}
+            <ol className={`${styles.ol} ${feedType !== 'jobs' ? styles.listMargin : ''}`} start={listStart}>
+                {items?.map((item) => (
+                    <li key={item.id} className={styles.post}>
+                        <div className={styles.itemBlock}>
+                            <FeedItem item={item} />
+                        </div>
+                    </li>
+                ))}
+            </ol>
             <div className={styles.nav}>
                 {listStart !== 1 && (
                     <Link to={`/${feedType}/${pageNum - 1}`} className={styles.prev}>
