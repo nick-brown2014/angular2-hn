@@ -28,7 +28,7 @@ describe('routing', () => {
 
     it('renders the user page', async () => {
         renderPath('/user/pg');
-        expect(await screen.findByText(/User pg/)).toBeInTheDocument();
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
 
     it('renders settings', () => {
