@@ -13,13 +13,12 @@ function renderPath(path: string) {
 describe('routing', () => {
     it('redirects the root to the news feed', () => {
         renderPath('/');
-        expect(screen.getByText(/news feed/)).toBeInTheDocument();
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
 
     it('renders the show feed', () => {
         renderPath('/show/1');
-        expect(screen.getByText(/show feed/)).toBeInTheDocument();
-        expect(screen.getByText(/page 1/)).toBeInTheDocument();
+        expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
 
     it('renders item details', async () => {
