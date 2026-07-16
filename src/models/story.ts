@@ -1,7 +1,6 @@
 import type { Comment } from './comment';
+import type { FeedType } from './feed-type.type';
 import type { PollResult } from './poll-result';
-
-export type FeedType = 'poll' | 'story' | 'job';
 
 export interface Story {
     id: number;

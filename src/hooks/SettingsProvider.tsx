@@ -1,16 +1,6 @@
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
-import type { Settings } from '../types/settings';
-
-interface SettingsContextValue {
-    settings: Settings;
-    toggleSettings: () => void;
-    toggleOpenLinksInNewTab: () => void;
-    setTheme: (theme: string) => void;
-    setFont: (size: string) => void;
-    setSpacing: (spacing: string) => void;
-}
-
-const SettingsContext = createContext<SettingsContextValue | null>(null);
+import { useState, useEffect, useCallback, type ReactNode } from 'react';
+import type { Settings } from '../models/settings';
+import { SettingsContext } from './settingsContext';
 
 function getInitialSettings(): Settings {
     const savedTheme = localStorage.getItem('theme');
@@ -38,7 +28,6 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const mq = window.matchMedia('(prefers-color-scheme: dark)');
         const handler = (e: MediaQueryListEvent) => {
-            if (localStorage.getItem('themeExplicit') === 'true') return;
             setSettings((prev) => {
                 const newTheme = e.matches ? 'night' : 'default';
                 localStorage.setItem('theme', newTheme);
@@ -64,7 +53,6 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     const setTheme = useCallback((theme: string) => {
         setSettings((prev) => {
             localStorage.setItem('theme', theme);
-            localStorage.setItem('themeExplicit', 'true');
             return { ...prev, theme };
         });
     }, []);
@@ -88,10 +76,4 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
             {children}
         </SettingsContext.Provider>
     );
-}
-
-export function useSettings(): SettingsContextValue {
-    const ctx = useContext(SettingsContext);
-    if (!ctx) throw new Error('useSettings must be used within a SettingsProvider');
-    return ctx;
 }

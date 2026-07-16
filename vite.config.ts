@@ -7,20 +7,9 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            manifest: {
-                name: 'React HN',
-                short_name: 'React HN',
-                icons: [
-                    { src: '/assets/icons/android-chrome-144x144.png', sizes: '144x144', type: 'image/png' },
-                    { src: '/assets/icons/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-                    { src: '/assets/icons/android-chrome-256x256.png', sizes: '256x256', type: 'image/png' },
-                    { src: '/assets/icons/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
-                ],
-                theme_color: '#b92b27',
-                background_color: '#ffffff',
-                display: 'standalone',
-                orientation: 'portrait',
-                start_url: '/',
+            manifest: false,
+            workbox: {
+                globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
             },
         }),
     ],

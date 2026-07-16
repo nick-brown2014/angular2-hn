@@ -1,6 +1,6 @@
 # React HN
 
-A Progressive Web App (PWA) Hacker News client built with React 19, TypeScript, Vite, React Router v7, and TanStack Query.
+A Progressive Web App (PWA) Hacker News client built with React 19, TypeScript, Vite, React Router v6, and TanStack Query.
 
 Displays Hacker News feeds (news, newest, show, ask, jobs), item details with recursive comments, user profiles, and supports theming (default/night/AMOLED black).
 
@@ -8,7 +8,7 @@ Displays Hacker News feeds (news, newest, show, ask, jobs), item details with re
 
 - **React 19** with TypeScript
 - **Vite** for build tooling
-- **React Router v7** for client-side routing
+- **React Router v6** for client-side routing
 - **TanStack Query** for data fetching and caching
 - **SCSS Modules** for component-scoped styles
 - **Vite PWA Plugin** for service worker and offline support
@@ -18,6 +18,8 @@ Displays Hacker News feeds (news, newest, show, ask, jobs), item details with re
 ## Getting Started
 
 ```bash
+nvm install
+nvm use
 npm install
 npm run dev
 ```
@@ -41,10 +43,10 @@ src/
   api/           API service functions (Hacker News API)
   components/    Reusable UI components (Header, Footer, Settings, Loader, ErrorMessage)
   hooks/         React context and hooks (useSettings)
+  models/        Hacker News and settings data models
   pages/         Route pages (Feed, ItemDetails, User)
   scss/          Global SCSS variables, themes, and media queries
   test/          Test files
-  types/         TypeScript interfaces
   utils/         Utility functions
 ```
 

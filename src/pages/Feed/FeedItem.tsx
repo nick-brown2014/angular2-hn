@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSettings } from '../../hooks/useSettings';
 import { formatComment } from '../../utils/formatComment';
-import type { Story } from '../../types/story';
+import type { Story } from '../../models/story';
 import styles from './FeedItem.module.scss';
 
 interface FeedItemProps {

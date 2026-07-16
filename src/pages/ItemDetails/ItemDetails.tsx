@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchItemContent } from '../../api/hackernews';
+import { useItem } from '../../hooks/useHackerNews';
 import { useSettings } from '../../hooks/useSettings';
 import { formatComment } from '../../utils/formatComment';
 import { Comment } from './Comment';
@@ -15,11 +14,7 @@ export function ItemDetails() {
     const { settings } = useSettings();
     const itemId = Number(id);
 
-    const { data: item, isLoading, error } = useQuery({
-        queryKey: ['item', itemId],
-        queryFn: () => fetchItemContent(itemId),
-        enabled: !isNaN(itemId),
-    });
+    const { data: item, isLoading, error } = useItem(itemId);
 
     useEffect(() => {
         window.scrollTo(0, 0);

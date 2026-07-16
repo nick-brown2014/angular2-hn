@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ItemDetails } from '../pages/ItemDetails/ItemDetails';
-import { SettingsProvider } from '../hooks/useSettings';
+import { SettingsProvider } from '../hooks/SettingsProvider';
 
 vi.mock('../api/hackernews', () => ({
     fetchItemContent: vi.fn().mockResolvedValue({

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchFeed } from '../../api/hackernews';
+import { useFeed } from '../../hooks/useHackerNews';
 import { FeedItem } from './FeedItem';
 import { Loader } from '../../components/Loader/Loader';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
@@ -16,10 +15,7 @@ export function Feed({ feedType }: FeedProps) {
     const pageNum = page ? parseInt(page, 10) : 1;
     const listStart = (pageNum - 1) * 30 + 1;
 
-    const { data: items, isLoading, error } = useQuery({
-        queryKey: ['feed', feedType, pageNum],
-        queryFn: () => fetchFeed(feedType, pageNum),
-    });
+    const { data: items, isLoading, error } = useFeed(feedType, pageNum);
 
     useEffect(() => {
         window.scrollTo(0, 0);

@@ -36,7 +36,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon-180x180.png">
 </head>
 <body>
+  <div id="skip"><a href="#content">skip to navigation</a></div>
   <div id="root"></div>
+  <div class="app-loader" id="content">
+    <img class="logo" src="/assets/images/logo.svg" alt="Logo">
+    <noscript>
+      <h4>Sorry, JavaScript needs to be enabled in order to run this application.</h4>
+    </noscript>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 
   <script>

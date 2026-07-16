@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUser } from '../../api/hackernews';
+import { useUser } from '../../hooks/useHackerNews';
 import { Loader } from '../../components/Loader/Loader';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 import styles from './User.module.scss';
@@ -9,11 +8,7 @@ export function UserPage() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
-    const { data: user, isLoading, error } = useQuery({
-        queryKey: ['user', id],
-        queryFn: () => fetchUser(id!),
-        enabled: !!id,
-    });
+    const { data: user, isLoading, error } = useUser(id);
 
     if (isLoading) return <Loader />;
     if (error) return <ErrorMessage message={`Could not load user ${id}.`} />;
