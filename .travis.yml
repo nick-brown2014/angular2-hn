@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - "6.9"
+  - "14"
+
+dist: focal
+
+addons:
+  chrome: stable
 
 branches:
   only:
@@ -12,6 +17,7 @@ before_script:
 
 script:
   - npm run build
+  - npm test -- --watch=false --browsers=ChromeHeadlessCI
 
 after_success:
   - firebase use default
