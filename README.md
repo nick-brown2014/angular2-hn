@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A progressive Hacker News client built with Angular
+  A progressive Hacker News client built with React
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
 
 ---
 
-:zap: **Fast:** Service Worker App Shell + Dynamic Content model to achieve faster load times with and without a network.
+:zap: **Fast:** Service Worker (Workbox via vite-plugin-pwa) precaching + runtime caching to achieve faster load times with and without a network.
 
 :iphone: **Responsive:** Completely responsive UI that can be installed to your mobile home screen to provide a native feel.
 
@@ -73,16 +73,15 @@ Feel free to send me feedback on [twitter](https://twitter.com/hdjirdeh) or [fil
 
 ## Build process
 
-Note: This project has been ejected (with AOT + production settings) in order to customize Webpack configurations.
+This project is built with [Vite](https://vitejs.dev/) + React + TypeScript.
 
  - Clone or download the repo
  - `npm install`
- - `npm start` to run the application with webpack-dev-server or `npm build` to kick off a fresh build and update the output directory (`dist/`)
+ - `npm run dev` to run the application with the Vite dev server (http://localhost:5173)
+ - `npm run build` to type-check and produce a fresh production build in the output directory (`dist/`)
+ - `npm run preview` to locally preview the production build
 
-Note: Any Service Worker changes will not be reflected when you run the application locally in development. To test service worker changes:
- - `npm build`
- - `npm run precache` to generate the service worker file
- - `npm run static-serve` to load the application along with the service worker asset using [live-server](https://github.com/tapio/live-server)
+The service worker (and offline support) is generated at build time by [`vite-plugin-pwa`](https://vite-pwa-org.netlify.app/) using Workbox. Service worker behavior is only active for production builds, so use `npm run build` followed by `npm run preview` to test it locally.
 
 ## Contributors
 
