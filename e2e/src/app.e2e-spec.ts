@@ -1,23 +1,34 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('angular-hnpwa App', () => {
   let page: AppPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new AppPage();
+    await page.navigateTo('/news/1');
+    await page.waitForFeed();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-hnpwa!');
+  it('renders the feed navigation', async () => {
+    expect(await page.getHeaderLinks().getText()).toEqual(['new', 'show', 'ask', 'jobs']);
+  });
+
+  it('renders stories on the news feed', async () => {
+    expect(await page.getFeedItems().count()).toBeGreaterThan(0);
+    expect(await page.getFirstItemTitle().getText()).toBeTruthy();
   });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
+    const logs = await browser
+      .manage()
+      .logs()
+      .get(logging.Type.BROWSER);
+    expect(logs).not.toContain(
+      jasmine.objectContaining({
+        level: logging.Level.SEVERE
+      } as logging.Entry)
+    );
   });
 });
