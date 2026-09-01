@@ -1,16 +1,26 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('angular-hnpwa App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display the header navigation', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-hnpwa!');
+    expect(page.getTitleText()).toEqual('new | show | ask | jobs');
+  });
+
+  it('should link the logo to the news feed', () => {
+    page.navigateTo();
+    expect(page.getHomeLink().getAttribute('href')).toContain('/news/1');
+  });
+
+  it('should display the footer', () => {
+    page.navigateTo();
+    expect(page.getFooterText()).toContain('GitHub');
   });
 
   afterEach(async () => {
