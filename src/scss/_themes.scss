@@ -1,5 +1,5 @@
-@import "./media";
-@import "./theme_variables";
+@import './media';
+@import './theme_variables';
 
 /* ----------------------------------
 
@@ -26,7 +26,7 @@
       background: $body-background-color;
 
       @media #{$mobile-only} {
-       background: $wrapper-mobile-background-color;
+        background: $wrapper-mobile-background-color;
       }
     }
 
@@ -35,14 +35,14 @@
       color: $wrapper-color;
 
       @media #{$mobile-only} {
-       background: $wrapper-mobile-background-color;
+        background: $wrapper-mobile-background-color;
       }
 
       a {
         color: $item-a-color;
 
         &:visited {
-            color: $item-a-visited-color;
+          color: $item-a-visited-color;
         }
       }
 
@@ -73,7 +73,12 @@
         }
       }
 
-      .subtext, .subtext-palm, .subtext-laptop, .domain, .meta, .deleted-meta{
+      .subtext,
+      .subtext-palm,
+      .subtext-laptop,
+      .domain,
+      .meta,
+      .deleted-meta {
         color: $subtext-color;
 
         a {
@@ -103,7 +108,8 @@
         color: $secondary-link-color;
         background: $secondary-link-color;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           background: $secondary-link-color;
         }
       }
@@ -116,8 +122,8 @@
 
       .back-button {
         @media #{$mobile-only} {
-          border-top: .3rem solid $secondary-link-color;
-          border-right: .3rem solid $secondary-link-color;
+          border-top: 0.3rem solid $secondary-link-color;
+          border-right: 0.3rem solid $secondary-link-color;
         }
       }
 
@@ -126,7 +132,8 @@
           .head {
             background-color: $secondary-link-color;
 
-            &:before, &:after {
+            &:before,
+            &:after {
               background-color: $wrapper-background-color;
 
               @media #{$mobile-only} {
@@ -170,7 +177,8 @@
               background-color: $wrapper-mobile-background-color;
             }
 
-            &:before, &:after {
+            &:before,
+            &:after {
               background-color: $wrapper-background-color;
 
               @media #{$mobile-only} {
