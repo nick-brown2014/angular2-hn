@@ -20,6 +20,7 @@ export function Comment({ comment }: { comment: CommentModel }) {
           [{collapse ? '+' : '-'}]
         </span>{' '}
         <Link to={`/user/${comment.user}`}>{comment.user}</Link>
+        {' '}
         <span className="time">{comment.time_ago}</span>
       </div>
       <div className="comment-tree">

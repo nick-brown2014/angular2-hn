@@ -2,6 +2,10 @@
 @import '../../scss/theme_variables';
 
 .app-feed {
+  @media #{$mobile-only} {
+    max-width: 400px;
+  }
+
   a {
     text-decoration: none;
     font-weight: bold;

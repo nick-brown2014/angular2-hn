@@ -15,7 +15,12 @@ export function Item({ item }: { item: Story }) {
           <a className="title" style={{ fontSize: `${settings.titleFontSize}px` }} href={item.url} {...externalProps}>
             {item.title}
           </a>
-          {item.domain && <span className="domain">({item.domain})</span>}
+          {item.domain && (
+            <>
+              {' '}
+              <span className="domain">({item.domain})</span>
+            </>
+          )}
         </p>
       ) : (
         <p>

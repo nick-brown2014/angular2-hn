@@ -35,6 +35,7 @@ export function User() {
           <div className="mobile item-header">
             <p className="title-block">
               <span className="back-button" onClick={() => navigate(-1)} />
+              {' '}
               Profile: {user.id}
             </p>
           </div>
