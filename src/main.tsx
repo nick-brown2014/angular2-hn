@@ -9,4 +9,12 @@ if (import.meta.env.PROD) {
   import('virtual:pwa-register').then(({ registerSW }) => registerSW({ immediate: true }));
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><SettingsProvider><App /></SettingsProvider></BrowserRouter></React.StrictMode>);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <SettingsProvider>
+        <App />
+      </SettingsProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

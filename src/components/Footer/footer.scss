@@ -1,26 +1,25 @@
+@import '../../scss/media';
+@import '../../scss/theme_variables';
+
 .app-footer {
-@import "../../scss/media";
-@import "../../scss/theme_variables";
+  #footer {
+    position: relative;
+    padding: 10px;
+    height: 60px;
+    letter-spacing: 0.7px;
+    text-align: center;
 
-#footer {
-  position: relative;
-  padding: 10px;
-  height: 60px;
-  letter-spacing: 0.7px;
-  text-align: center;
+    a {
+      font-weight: bold;
+      text-decoration: none;
 
-  a {
-  	font-weight: bold;
-  	text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
-    &:hover {
-      text-decoration: underline;
+    @media #{$mobile-only} {
+      display: none;
     }
   }
-
-  @media #{$mobile-only} {
-    display: none;
-  }
-}
-
 }

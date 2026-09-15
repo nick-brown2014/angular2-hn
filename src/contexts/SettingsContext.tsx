@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Settings } from '../models/settings';
 
 type SettingsContextValue = {
@@ -18,31 +18,34 @@ function initialSettings(): Settings {
     openLinkInNewTab: JSON.parse(localStorage.getItem('openLinkInNewTab') ?? 'false') as boolean,
     theme: localStorage.getItem('theme') ?? 'default',
     titleFontSize: localStorage.getItem('titleFontSize') ?? '16',
-    listSpacing: localStorage.getItem('listSpacing') ?? '0'
+    listSpacing: localStorage.getItem('listSpacing') ?? '0',
   };
 }
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(initialSettings);
 
-  const toggleSettings = () => setSettings((current) => ({ ...current, showSettings: !current.showSettings }));
-  const toggleOpenLinksInNewTab = () => setSettings((current) => {
-    const value = !current.openLinkInNewTab;
+  const toggleSettings = useCallback(
+    () => setSettings((current) => ({ ...current, showSettings: !current.showSettings })),
+    []
+  );
+  const toggleOpenLinksInNewTab = useCallback(() => {
+    const value = !settings.openLinkInNewTab;
     localStorage.setItem('openLinkInNewTab', JSON.stringify(value));
-    return { ...current, openLinkInNewTab: value };
-  });
-  const setTheme = (theme: string) => setSettings((current) => {
+    setSettings((current) => ({ ...current, openLinkInNewTab: value }));
+  }, [settings.openLinkInNewTab]);
+  const setTheme = useCallback((theme: string) => {
     localStorage.setItem('theme', theme);
-    return { ...current, theme };
-  });
-  const setFont = (size: string) => setSettings((current) => {
+    setSettings((current) => ({ ...current, theme }));
+  }, []);
+  const setFont = useCallback((size: string) => {
     localStorage.setItem('titleFontSize', size);
-    return { ...current, titleFontSize: size };
-  });
-  const setSpacing = (space: string) => setSettings((current) => {
+    setSettings((current) => ({ ...current, titleFontSize: size }));
+  }, []);
+  const setSpacing = useCallback((space: string) => {
     localStorage.setItem('listSpacing', space);
-    return { ...current, listSpacing: space };
-  });
+    setSettings((current) => ({ ...current, listSpacing: space }));
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -52,9 +55,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     const onChange = (event: MediaQueryListEvent) => setTheme(event.matches ? 'night' : 'default');
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
-  }, []);
+  }, [setTheme]);
 
-  const value = useMemo(() => ({ settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing }), [settings]);
+  const value = useMemo(
+    () => ({ settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing }),
+    [settings, toggleSettings, toggleOpenLinksInNewTab, setTheme, setFont, setSpacing]
+  );
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 }
 

@@ -1,8 +1,7 @@
+@import '../../scss/media';
+@import '../../scss/theme_variables';
+
 .app-comment {
-@import "../../scss/media";
-@import "../../scss/theme_variables";
-
-
   a {
     font-weight: bold;
     text-decoration: none;
@@ -11,77 +10,76 @@
     }
   }
 
-.meta {
-  font-size: 13px;
-  color: #696969;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-  a {
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .time {
-    padding-left: 5px;
-  }
-}
-
-@media #{$mobile-only} {
   .meta {
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-size: 13px;
+    color: #696969;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     .time {
-      padding: 0;
-      float: right;
+      padding-left: 5px;
     }
   }
-}
 
-.meta-collapse {
-  margin-bottom: 20px;
-}
-
-.deleted-meta {
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  margin: 30px 0;
-  a {
-    text-decoration: none;
+  @media #{$mobile-only} {
+    .meta {
+      font-size: 14px;
+      margin-bottom: 10px;
+      .time {
+        padding: 0;
+        float: right;
+      }
+    }
   }
-}
 
-.collapse {
-  font-size: 13px;
-  letter-spacing: 2px;
-  cursor: pointer;
-}
+  .meta-collapse {
+    margin-bottom: 20px;
+  }
 
-.comment-tree {
-  margin-left: 24px;
-}
+  .deleted-meta {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin: 30px 0;
+    a {
+      text-decoration: none;
+    }
+  }
 
-@media #{$tablet-only} {
+  .collapse {
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
   .comment-tree {
-    margin-left: 8px;
+    margin-left: 24px;
   }
-}
 
-.comment-text {
-  font-size: 15px;
-  margin-top: 0;
-  margin-bottom: 20px;
-  word-wrap: break-word;
-  line-height: 1.5em;
-}
+  @media #{$tablet-only} {
+    .comment-tree {
+      margin-left: 8px;
+    }
+  }
 
-.subtree {
-  margin-left: 0;
-  padding: 0;
-  list-style-type: none;
-}
+  .comment-text {
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    line-height: 1.5em;
+  }
 
+  .subtree {
+    margin-left: 0;
+    padding: 0;
+    list-style-type: none;
+  }
 }
