@@ -141,7 +141,12 @@ describe('HackerNewsAPIService', () => {
       const urls = FakeXMLHttpRequest.requests.map((r) => r.url);
       expect(urls).toContain(`${baseUrl}/item/101`);
       expect(urls).toContain(`${baseUrl}/item/102`);
-      done();
+      FakeXMLHttpRequest.responseBody = { id: 101, points: 4 };
+      setTimeout(() => {
+        expect(data.poll_votes_count).toBe(8);
+        expect(data.poll[0]).toEqual({ id: 101, points: 4 } as any);
+        done();
+      }, 0);
     }, done.fail);
   });
 
