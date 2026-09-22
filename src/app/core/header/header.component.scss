@@ -126,9 +126,20 @@ h1 {
   top: 0;
   right: 20px;
   height: 100%;
+  display: flex;
+  align-items: flex-start;
 
   @media #{$mobile-only} {
     right: 10px;
+  }
+
+  .search-link {
+    display: block;
+    margin-right: 14px;
+
+    &.active img {
+      opacity: 1;
+    }
   }
 
   img {
