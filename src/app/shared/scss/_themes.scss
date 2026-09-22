@@ -85,6 +85,31 @@
         background: $header-background-color;
       }
 
+      .search-form {
+        input {
+          background: $wrapper-background-color;
+          color: $wrapper-color;
+          border: $border;
+
+          @media #{$mobile-only} {
+            background: $wrapper-mobile-background-color;
+          }
+
+          &::placeholder {
+            color: $subtext-color;
+          }
+        }
+
+        button {
+          background: $secondary-link-color;
+          color: $body-background-color;
+        }
+      }
+
+      .search-hint {
+        color: $subtext-color;
+      }
+
       .item-header {
         border-bottom: $border;
 

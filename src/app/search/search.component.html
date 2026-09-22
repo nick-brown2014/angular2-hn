@@ -1,0 +1,45 @@
+<div class="main-content search">
+  <form class="search-form" (ngSubmit)="submit()">
+    <input
+      type="search"
+      name="q"
+      [(ngModel)]="query"
+      placeholder="Search Hacker News"
+      aria-label="Search Hacker News"
+      autocomplete="off"
+      autofocus>
+    <button type="submit" [disabled]="!query.trim()">Search</button>
+  </form>
+
+  <app-loader *ngIf="!items && !errorMessage"></app-loader>
+  <app-error-message [message]="errorMessage" *ngIf="!items && errorMessage !== ''"></app-error-message>
+
+  <div *ngIf="items">
+    <p class="search-hint" *ngIf="!activeQuery">
+      Enter a term above to search stories.
+    </p>
+
+    <p class="search-hint" *ngIf="activeQuery && items.length === 0">
+      No stories found for “{{ activeQuery }}”.
+    </p>
+
+    <p class="search-hint" *ngIf="activeQuery && items.length > 0">
+      {{ totalHits | number }} results for “{{ activeQuery }}”
+    </p>
+
+    <ol *ngIf="items.length > 0" class="list-margin" start="{{ listStart }}">
+      <li *ngFor="let item of items" class="post">
+        <item class="item-block" [item]="item"></item>
+      </li>
+    </ol>
+
+    <div class="nav" *ngIf="activeQuery && items.length > 0">
+      <a *ngIf="pageNum > 1" [routerLink]="['/search', pageNum - 1]" queryParamsHandling="preserve" class="prev">
+        ‹ Prev
+      </a>
+      <a *ngIf="hasMore" [routerLink]="['/search', pageNum + 1]" queryParamsHandling="preserve" class="more">
+        More ›
+      </a>
+    </div>
+  </div>
+</div>
