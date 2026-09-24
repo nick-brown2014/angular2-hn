@@ -164,14 +164,20 @@ describe('HackerNewsAPIService', () => {
             `${baseUrl}/item/102`
           ]);
 
-          setTimeout(() => {
+          const bothOptionsLoaded = () =>
+            item.poll.every(option => option && option.points !== undefined);
+          const check = setInterval(() => {
+            if (!bothOptionsLoaded()) {
+              return;
+            }
+            clearInterval(check);
             expect(item.poll).toEqual([
               { points: 3, content: 'A' },
               { points: 5, content: 'B' }
             ]);
             expect(item.poll_votes_count).toBe(8);
             done();
-          }, 10);
+          }, 1);
         },
         done.fail
       );
