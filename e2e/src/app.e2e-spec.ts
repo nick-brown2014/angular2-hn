@@ -1,16 +1,23 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Angular HN PWA', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-hnpwa!');
+  it('should render the header navigation', async () => {
+    await page.navigateTo();
+    expect(await page.getHomeLink().isPresent()).toBe(true);
+    expect(await page.getHeaderNavLinks().getText()).toEqual(['new', 'show', 'ask', 'jobs']);
+    expect(await page.getHeaderNavText()).toEqual('new | show | ask | jobs');
+  });
+
+  it('should redirect the root url to the first news page', async () => {
+    await page.navigateTo();
+    expect(await browser.getCurrentUrl()).toContain('/news/1');
   });
 
   afterEach(async () => {
