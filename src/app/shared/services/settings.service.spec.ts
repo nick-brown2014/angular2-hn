@@ -61,8 +61,10 @@ describe('SettingsService', () => {
 
   it('unsubscribes on destroy', () => {
     service = createService();
+    const registeredListener = mediaQuery.addEventListener.calls.mostRecent().args[1];
     service.ngOnDestroy();
-    expect(mediaQuery.removeEventListener).toHaveBeenCalledWith('change', jasmine.any(Function));
+    expect(mediaQuery.removeEventListener).toHaveBeenCalledTimes(1);
+    expect(mediaQuery.removeEventListener.calls.mostRecent().args[1]).toBe(registeredListener);
   });
 
   describe('toggleSettings', () => {
