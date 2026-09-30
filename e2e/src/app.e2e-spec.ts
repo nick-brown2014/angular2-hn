@@ -34,7 +34,7 @@ describe('Angular HN PWA', () => {
     it('should render the list of stories', async () => {
       await page.waitForFeed();
       expect(await page.getFeedItems().count()).toBeGreaterThan(0);
-      expect(await page.getFeedItems().first().element(by.css('a.title')).getText()).not.toBe('');
+      expect(await page.getFirstItemTitle().getText()).not.toBe('');
     });
 
     it('should open and close the settings panel', async () => {
@@ -53,9 +53,11 @@ describe('Angular HN PWA', () => {
     });
 
     it('should navigate between feeds from the header', async () => {
+      const topNewsTitle = await page.getFirstItemTitle().getText();
+
       await page.getNavLinks().get(0).click();
       await page.waitForUrl('/newest/1');
-      await page.waitForFeed();
+      await page.waitForFirstItemTitleToChange(topNewsTitle);
 
       expect(await page.getFeedItems().count()).toBeGreaterThan(0);
     });

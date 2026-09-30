@@ -39,6 +39,10 @@ export class AppPage {
     return element.all(by.css('app-feed ol li.post'));
   }
 
+  getFirstItemTitle(): ElementFinder {
+    return this.getFeedItems().first().element(by.css('a.title'));
+  }
+
   getFirstItemCommentsLink(): ElementFinder {
     return element.all(by.css('app-feed .subtext-laptop a[href^="/item/"]')).first();
   }
@@ -65,6 +69,10 @@ export class AppPage {
 
   waitForFeed() {
     return this.waitForPresence(this.getFeedItems().first());
+  }
+
+  waitForFirstItemTitleToChange(previousTitle: string) {
+    return browser.wait(async () => (await this.getFirstItemTitle().getText()) !== previousTitle, WAIT_TIMEOUT) as Promise<unknown>;
   }
 
   waitForUrl(fragment: string) {
