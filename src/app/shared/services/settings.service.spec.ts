@@ -123,11 +123,12 @@ describe('SettingsService', () => {
     });
 
     it('should detach its color scheme listener on destroy', () => {
-      spyOn(darkMode, 'removeEventListener');
-
       service.ngOnDestroy();
 
-      expect(darkMode.removeEventListener).toHaveBeenCalledWith('change', jasmine.any(Function));
+      darkMode.dispatchEvent(new MediaQueryListEvent('change', { media: darkMode.media, matches: true }));
+
+      expect(service.settings.theme).toBe('default');
+      expect(store.theme).toBe('default');
     });
   });
 });

@@ -15,6 +15,7 @@ export class SettingsService {
   };
 
   darkColorSchemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  private systemPreferredColorSchemeListener = this.handleSystemPreferredColorSchemeChange.bind(this);
   
   constructor() {
     this.subscribeToSystemPreferredColorScheme();
@@ -38,7 +39,7 @@ export class SettingsService {
   subscribeToSystemPreferredColorScheme() {
     this.darkColorSchemeMedia.addEventListener(
       'change',
-      this.handleSystemPreferredColorSchemeChange.bind(this)
+      this.systemPreferredColorSchemeListener
     );
   }
 
@@ -59,7 +60,7 @@ export class SettingsService {
   unSubscribeToSystemPrefferedColorScheme() {
     this.darkColorSchemeMedia.removeEventListener(
       'change',
-      this.handleSystemPreferredColorSchemeChange.bind(this)
+      this.systemPreferredColorSchemeListener
     );
   }
 
