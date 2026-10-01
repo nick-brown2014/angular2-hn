@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Angular 2 HN</title>
+  <title>React HN</title>
 
-  <meta name="description" content="A Hacker News client built with Angular CLI, RxJS and Webpack"/>
+  <meta name="description" content="A Hacker News client built with React, TypeScript, and Vite"/>
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@hdjirdeh">
-  <meta name="twitter:title" content="Angular 2 HN">
-  <meta name="twitter:description" content="A Hacker News client built with Angular CLI, RxJS and Webpack">
-  <meta name="twitter:creator" content="@hdjirdeh">
+  <meta name="twitter:title" content="React HN">
+  <meta name="twitter:description" content="A Hacker News client built with React, TypeScript, and Vite">
   <meta name="twitter:image" content="assets/images/logo-loading.png">
 
-  <meta property="og:title" content="Angular 2 HN"/>
+  <meta property="og:title" content="React HN"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://angular2-hn.firebaseapp.com/"/>
   <meta property="og:image" content="assets/images/logo-loading.png"/>
-  <meta property="og:description" content="A Hacker News client built with Angular CLI, RxJS and Webpack"/>
-  <meta property="og:site_name" content="Angular 2 HN"/>
+  <meta property="og:description" content="A Hacker News client built with React, TypeScript, and Vite"/>
+  <meta property="og:site_name" content="React HN"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b92b27">
@@ -38,7 +36,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon-180x180.png">
 </head>
 <body>
+  <div id="skip"><a href="#content">skip to navigation</a></div>
   <div id="root"></div>
+  <div class="app-loader" id="content">
+    <img class="logo" src="/assets/images/logo.svg" alt="Logo">
+    <noscript>
+      <h4>Sorry, JavaScript needs to be enabled in order to run this application.</h4>
+    </noscript>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 
   <script>
