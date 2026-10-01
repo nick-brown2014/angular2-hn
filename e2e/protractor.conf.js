@@ -13,9 +13,16 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+      binary: process.env.CHROME_BIN,
+      args: ['--window-size=1280,1024'].concat(
+        process.env.CI ? ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] : []
+      )
+    }
   },
   directConnect: true,
+  chromeDriver: process.env.CHROMEDRIVER_BIN,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
