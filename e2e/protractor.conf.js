@@ -4,6 +4,12 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+// Protractor 5's webdriver-manager can't download drivers for current Chrome releases.
+// Set CHROME_BIN / CHROMEDRIVER_BIN to use a local Chrome and a matching chromedriver
+// (and pass --webdriver-update=false to `ng e2e`).
+const chromeBinary = process.env.CHROME_BIN;
+const chromeDriver = process.env.CHROMEDRIVER_BIN;
+
 /**
  * @type { import("protractor").Config }
  */
@@ -13,8 +19,13 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+      ...(chromeBinary ? { binary: chromeBinary } : {}),
+      args: ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--window-size=1280,1024']
+    }
   },
+  ...(chromeDriver ? { chromeDriver } : {}),
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
